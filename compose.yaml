@@ -11,7 +11,8 @@ services:
     image: envoyproxy/envoy:v1.23-latest
     container_name: envoy_proxy
     ports:
-      - "10000:10000"  # Exposes Envoy proxy on port 10000
+      - "8080:8080"  # Exposes Envoy proxy on port 10000
+      - "9901:9901"  # Exposes Envoy admin on port 9901
     volumes:
       - ./envoy.yaml:/etc/envoy/envoy.yaml  # Envoy configuration file
     networks:
