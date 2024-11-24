@@ -2,8 +2,8 @@ services:
   flask:
     image: aaronw/flasktest
     container_name: flask_app
-    ports:
-      - "5000:5000"  # Exposes Flask app on port 5000
+#    ports:
+#      - "5000:5000"  # Exposes Flask app on port 5000
     networks:
       - app-network
 
@@ -13,7 +13,7 @@ services:
     ports:
       - "10000:10000"  # Exposes Envoy proxy on port 10000
     volumes:
-      - ./envoy-config.yaml:/etc/envoy/envoy.yaml  # Envoy configuration file
+      - ./envoy.yaml:/etc/envoy/envoy.yaml  # Envoy configuration file
     networks:
       - app-network
 
