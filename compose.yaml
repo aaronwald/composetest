@@ -1,0 +1,24 @@
+services:
+  flask:
+    image: aaronw/flasktest
+    container_name: flask_app
+    ports:
+      - "5000:5000"  # Exposes Flask app on port 5000
+    networks:
+      - app-network
+
+  envoy:
+    image: envoyproxy/envoy:v1.23-latest
+    container_name: envoy_proxy
+    ports:
+      - "10000:10000"  # Exposes Envoy proxy on port 10000
+    volumes:
+      - ./envoy-config.yaml:/etc/envoy/envoy.yaml  # Envoy configuration file
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+      
