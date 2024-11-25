@@ -2,12 +2,19 @@ services:
   flask:
     image: aaronw/flasktest:latest
     container_name: flask_app
+    depends_on:
+      envoy:
+        condition: service_started
     networks:
       - app-network
+    
 
   grpc:
     image: aaronw/grpctest:latest
     container_name: grpc_app
+    depends_on:
+      envoy:
+        condition: service_started
     networks:
       - app-network
 
