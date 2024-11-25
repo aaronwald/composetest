@@ -29,6 +29,9 @@ services:
       - ./envoy.yaml:/etc/envoy/envoy.yaml  # Envoy configuration file
     networks:
       - app-network
+    command:
+      - "--config-path /etc/envoy/envoy.yaml"
+      - "--component-log-level main:warn"
 
 networks:
   app-network:
