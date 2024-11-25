@@ -16,7 +16,7 @@ static_resources:
               - name: local_service
                 domains: ["*"]
                 routes:
-                - match: { prefix: "/hello" }
+                - match: { prefix: "/" }
                   route: { cluster: hello_service }
             http_filters:
             - name: envoy.grpc_web
@@ -62,7 +62,7 @@ static_resources:
                     socket_address: 
                       address: flask_app
                       port_value: 5000 
-    - name: hello_service2
+    - name: hello_service
       connect_timeout: 0.25s
       type: LOGICAL_DNS
       typed_extension_protocol_options:
