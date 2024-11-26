@@ -7,7 +7,7 @@ services:
         condition: service_started
     networks:
       - app-network
-    
+
 
   grpc:
     image: aaronw/grpctest:latest
@@ -19,10 +19,10 @@ services:
       - app-network
 
   envoy:
-    image: envoyproxy/envoy:v1.23-latest
+    image: envoyproxy/envoy:dev-4aa1d1b2b7bc408d5b61ee2eb389e31300b76ad0 # 1.33-dev build
     container_name: envoy_proxy
     ports:
-      - "8080:8080" 
+      - "8080:8080"
       - "8081:8081"
       - "9901:9901"  # admin
     volumes:
@@ -36,5 +36,3 @@ services:
 networks:
   app-network:
     driver: bridge
-
-      
