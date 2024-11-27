@@ -76,6 +76,16 @@ static_resources:
                     socket_address:
                       address: flask_app
                       port_value: 5000
+      health_checks:
+        - timeout: 1s
+          interval: 10s
+          unhealthy_threshold: 3
+          healthy_threshold: 2
+          http_health_check:
+            path: /health
+            # expected_statuses:
+            #   - start: 200
+            #     end: 200
     - name: hello_service
       connect_timeout: 0.25s
       type: LOGICAL_DNS
