@@ -7,7 +7,8 @@ services:
         condition: service_started
     networks:
       - app-network
-
+    ports:
+      - "5000:5000"
 
   grpc:
     image: aaronw/grpctest:latest
@@ -17,6 +18,8 @@ services:
         condition: service_started
     networks:
       - app-network
+    ports:
+      - "50051:50051"
 
   envoy:
     image: envoyproxy/envoy:dev-4aa1d1b2b7bc408d5b61ee2eb389e31300b76ad0 # 1.33-dev build
