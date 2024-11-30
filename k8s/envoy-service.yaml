@@ -8,15 +8,19 @@ metadata:
     io.kompose.service: envoy
   name: envoy
 spec:
+  type: NodePort
   ports:
-    - name: "8080"
+    - name: "http"
       port: 8080
       targetPort: 8080
-    - name: "8081"
+      nodePort: 30080
+    - name: "grpc"
       port: 8081
       targetPort: 8081
-    - name: "9901"
+      nodePort: 30081
+    - name: "admin"
       port: 9901
       targetPort: 9901
+      nodePort: 30082
   selector:
     io.kompose.service: envoy
