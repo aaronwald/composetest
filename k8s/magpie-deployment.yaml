@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.delcosw.service: magpie
+  name: magpie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.delcosw.service: magpie
+  template:
+    metadata:
+      labels:
+        io.delcosw.service: magpie
+    spec:
+      containers:
+        - image: aaronw/magpie:latest
+          imagePullPolicy: Never
+          name: magpie
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
