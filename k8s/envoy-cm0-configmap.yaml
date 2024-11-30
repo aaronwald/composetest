@@ -59,6 +59,11 @@ data:
                         - name: backend
                           domains: ["*"]
                           routes:
+                            - match: { prefix: "/magpie" }
+                              route:
+                                cluster: ws_cluster
+                                upgrade_configs:
+                                - upgrade_type: websocket
                             - match: { prefix: "/" }
                               route:
                                 cluster: flask_app_cluster
@@ -67,6 +72,18 @@ data:
                         typed_config:
                           "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
       clusters:
+        - name: ws_cluster
+          connect_timeout: 0.25s
+          type: STRICT_DNS
+          load_assignment:
+            cluster_name: ws_cluster
+            endpoints:
+              - lb_endpoints:
+                  - endpoint:
+                      address:
+                        socket_address:
+                          address: magpie
+                          port_value: 8080
         - name: flask_app_cluster
           connect_timeout: 0.25s
           type: STRICT_DNS
