@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: magpie2email
+    delcosw: coypu
+  name: magpie2email
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: magpie2email
+  template:
+    metadata:
+      labels:
+        io.kompose.service: magpie2email
+    spec:
+      volumes:
+	- name: secret-volume
+	  secret:
+	    secretName: gmail-secret
+      containers:
+        - image: aaronw/magpie2email:latest
+          imagePullPolicy: Never
+          name: magpie2email
+          volumeMounts:
+            - name: secret-volume
+              readOnly: true
+              mountPath: "/etc/gmail-secret"
+      restartPolicy: Always
