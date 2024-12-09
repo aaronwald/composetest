@@ -16,9 +16,9 @@ spec:
         io.kompose.service: magpie2email
     spec:
       volumes:
-	- name: secret-volume
-	  secret:
-	    secretName: gmail-secret
+      - name: secret-volume
+        secret:
+          secretName: gmail-secret
       containers:
         - image: aaronw/magpie2email:latest
           imagePullPolicy: Never
