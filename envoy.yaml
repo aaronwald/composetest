@@ -94,7 +94,7 @@ static_resources:
                     typed_config:
                       "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
   clusters:
-  - name: flask_app_cluster
+    - name: rook_ws
       connect_timeout: 0.25s
       type: STRICT_DNS
       load_assignment:
