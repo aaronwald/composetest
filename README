@@ -1,3 +1,28 @@
 ```bash
-docker compose up --force-recreate  --always-recreate-deps 
+### docker compose up --force-recreate  --always-recreate-deps 
 ```
+
+```bash
+eval $(minikube docker-env)
+
+kubectl create secret generic gmail-secret --from-literal='username=xyz' --from-literal='password=abc'
+```
+
+```bash
+docker build -t aaronw/grpctest:latest .
+docker build -t aaronw/flasktest:latest .
+docker build -t aaronw/rook:latest .
+```
+
+```bash
+kubectl apply -f flask-deployment.yaml
+kubectl apply -f grpc-deployment.yaml
+kubectl apply -f rook-deployment.yaml
+kubectl apply -f flask-service.yaml
+kubectl apply -f grpc-service.yaml
+kubectl apply -f rook-service.yaml
+kubectl apply -f envoy-deployment.yaml
+kubectl apply -f envoy-cm0-configmap.yaml
+kubectl apply -f envoy-service.yaml
+```
+
