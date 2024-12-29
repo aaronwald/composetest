@@ -4,10 +4,8 @@
 
 ```bash
 eval $(minikube docker-env)
-
 kubectl create secret generic gmail-secret --from-literal='username=xyz' --from-literal='password=abc'
 kubectl create configmap envoy-cm1 --from-file=envoy.yaml
-
 ```
 
 ```bash
