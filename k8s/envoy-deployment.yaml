@@ -39,7 +39,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /etc/envoy/envoy.yaml
-              name: envoy-cm0
+              name: envoy-cm1
               subPath: envoy.yaml
       restartPolicy: Always
       volumes:
@@ -47,5 +47,5 @@ spec:
             items:
               - key: envoy.yaml
                 path: envoy.yaml
-            name: envoy-cm0
-          name: envoy-cm0
+            name: envoy-cm1
+          name: envoy-cm1
