@@ -34,8 +34,9 @@ spec:
             - containerPort: 8080
               protocol: TCP
           volumeMounts:
-            - mountPath: /data
-              name: messages
+            - name: secret-volume
+              readOnly: true
+              mountPath: "/etc/gmail-secret"
       restartPolicy: Always
       volumes:
         - name: messages
