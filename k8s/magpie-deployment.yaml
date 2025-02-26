@@ -26,6 +26,10 @@ spec:
       labels:
         io.delcosw.service: magpie
     spec:
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: gmail-secret
       containers:
         - image: aaronw/magpie:latest
           imagePullPolicy: Never
@@ -38,7 +42,3 @@ spec:
               readOnly: true
               mountPath: "/etc/gmail-secret"
       restartPolicy: Always
-      volumes:
-        - name: messages
-          persistentVolumeClaim:
-            claimName: messages
