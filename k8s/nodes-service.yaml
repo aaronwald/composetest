@@ -5,6 +5,7 @@ metadata:
     io.kompose.service: nodes
   name: nodes
 spec:
+  type: NodePort
   ports:
     - name: "http"
       port:  80
