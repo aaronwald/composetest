@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: nodes
+    delcosw: coypu
+  name: nodes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nodes
+  template:
+    metadata:
+      labels:
+        io.kompose.service: nodes
+    spec:
+      containers:
+        - image: aaronw/nodes:latest
+          imagePullPolicy: Never
+          name: nodes
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always

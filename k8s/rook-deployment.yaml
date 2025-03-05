@@ -24,7 +24,7 @@ spec:
           imagePullPolicy: Never
           name: rook
           ports:
-            - containerPort: 8080
+            - containerPort: 9090
               protocol: TCP
           volumeMounts:
             - name: secret-volume
