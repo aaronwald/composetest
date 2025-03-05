@@ -5,6 +5,7 @@ metadata:
     io.kompose.service: nodes
     delcosw: coypu
   name: nodes
+  namespace: teamwald
 spec:
   replicas: 1
   selector:

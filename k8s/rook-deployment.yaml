@@ -5,6 +5,7 @@ metadata:
     io.kompose.service: rook
     delcosw: coypu
   name: rook
+  namespace: teamwald
 spec:
   replicas: 1
   selector:
