@@ -6,7 +6,7 @@ metadata:
   name: rook
   namespace: teamwald
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - name: "ws"
       port:  9090
