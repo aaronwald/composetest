@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: chough
+  name: chough
+  namespace: teamwald
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "ws"
+      port:  9099
+      targetPort: 9099
+  selector:
+    io.kompose.service: chough
+
+  
