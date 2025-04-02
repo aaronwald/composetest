@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: choughscheduler
+    delcosw: coypu
+  name: choughscheduler
+  namespace: teamwald
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: choughscheduler
+  template:
+    metadata:
+      labels:
+        io.kompose.service: choughscheduler
+    spec:
+      containers:
+        - image: aaronw/choughscheduler:latest
+          imagePullPolicy: Never
+          name: choughscheduler
+      restartPolicy: Always
