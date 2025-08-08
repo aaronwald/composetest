@@ -1,5 +1,5 @@
 ```bash
-### docker compose up --force-recreate  --always-recreate-deps 
+### docker compose up --force-recreate  --always-recreate-deps
 ```
 
 ```bash
@@ -26,3 +26,7 @@ kubectl apply -f envoy-cm0-configmap.yaml
 kubectl apply -f envoy-service.yaml
 ```
 
+```bash
+minikube addons enable ingress
+kubectl get pods -n ingress-nginx
+```
