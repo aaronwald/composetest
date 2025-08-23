@@ -11,7 +11,7 @@ spec:
   - host: teamwald.local
     http:
       paths:
-      - path: /
+      - path: /ws
         pathType: Prefix
         backend:
           service:
