@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: mostdock
+  - host: teamwald.local
     http:
       paths:
       - path: /
