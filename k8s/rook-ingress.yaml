@@ -4,15 +4,15 @@ metadata:
   name: rook-ingress
   namespace: teamwald
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
   - host: teamwald.local
     http:
       paths:
-      - path: /ws
-        pathType: Prefix
+      - path: /static(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
           service:
             name: rook
