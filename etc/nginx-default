@@ -10,7 +10,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    location /static {
+    location /rook {
 	proxy_set_header Host teamwald.local;
         proxy_pass http://192.168.49.2:9090;
         proxy_set_header X-Real-IP $remote_addr;
