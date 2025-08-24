@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rook-ingress
+  namespace: teamwald
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: teamwald.local
+    http:
+      paths:
+      - path: /ws(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: rook-ws
+            port:
+              number: 9095
