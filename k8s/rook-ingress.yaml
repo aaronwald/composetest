@@ -11,7 +11,7 @@ spec:
   - host: teamwald.local
     http:
       paths:
-      - path: /static(/|$)(.*)
+      - path: /rook(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
