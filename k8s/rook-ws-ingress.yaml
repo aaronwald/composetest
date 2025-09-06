@@ -4,7 +4,6 @@ metadata:
   name: rookws-ingress
   namespace: teamwald
   annotations:
-    nginx.ingress.kubernetes.io/websocket-services: "rookws"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600" # 1 hour
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600" # 1 hour
     nginx.ingress.kubernetes.io/rewrite-target: /ws
