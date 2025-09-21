@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: ubipoller
+    delcosw: coypu
+  name: ubipoller
+  namespace: teamwald
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ubipoller
+  template:
+    metadata:
+      labels:
+        io.kompose.service: ubipoller
+    spec:
+      containers:
+        - image: aaronw/ubipoller:latest
+          imagePullPolicy: Never
+          name: ubipoller
+          resources:
+          env:
+          - name: MQTT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: poller-secret
+                key: mqtt_password
+          - name: MQTT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: poller-secret
+                key: mqtt_username
+          - name: UBI_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: poller-secret
+                key: ubi_api_key
+          limits:
+            memory: 128Mi
+            cpu: "1"
+      restartPolicy: Always
