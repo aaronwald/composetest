@@ -30,3 +30,7 @@ kubectl apply -f envoy-service.yaml
 minikube addons enable ingress
 kubectl get pods -n ingress-nginx
 ```
+
+```bash
+kubectl create secret generic poller-secret --from-literal=mqtt_password=foo --from-literal=ubi_api_key=bar
+```
