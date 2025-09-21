@@ -21,6 +21,9 @@ spec:
           imagePullPolicy: Never
           name: ubipoller
           resources:
+            limits:
+              memory: 128Mi
+              cpu: "1"
           env:
           - name: MQTT_PASSWORD
             valueFrom:
@@ -37,7 +40,4 @@ spec:
               secretKeyRef:
                 name: poller-secret
                 key: ubi_api_key
-          limits:
-            memory: 128Mi
-            cpu: "1"
       restartPolicy: Always
