@@ -1,0 +1,32 @@
+# Default values for ubipoller
+replicaCount: 1
+
+image:
+  repository: aaronw/ubipoller
+  pullPolicy: Never
+  tag: "latest"
+
+nameOverride: ""
+fullnameOverride: ""
+
+namespace: teamwald
+
+labels:
+  delcosw: coypu
+
+service:
+  type: LoadBalancer
+
+resources:
+  limits:
+    cpu: "1"
+    memory: 128Mi
+
+secrets:
+  name: poller-secret
+  keys:
+    mqttPassword: mqtt_password
+    mqttUsername: mqtt_username
+    ubiApiKey: ubi_api_key
+
+restartPolicy: Always
