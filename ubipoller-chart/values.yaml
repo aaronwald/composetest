@@ -4,7 +4,7 @@ replicaCount: 1
 image:
   repository: aaronw/ubipoller
   pullPolicy: Never
-  tag: "latest"
+  tag: "latest" # change for version
 
 nameOverride: ""
 fullnameOverride: ""
