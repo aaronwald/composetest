@@ -20,20 +20,17 @@ server {
   }
 
   location /chough/ {
-    proxy_set_header Host teamwald.local;
-    proxy_pass http://192.168.49.2:80;
-    proxy_http_version 2.0;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
+    # gRPC pass instead of proxy_pass
+    grpc_pass grpc://192.168.49.2:80;
 
-    # gRPC specific headers
-    proxy_set_header Content-Type "application/grpc";
-    proxy_set_header TE "trailers";
+    # Set the Host header for the ingress
+    grpc_set_header Host teamwald.local;
+    grpc_set_header X-Real-IP $remote_addr;
+    grpc_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    grpc_set_header X-Forwarded-Proto $scheme;
 
-    # Handle gRPC trailers
-    proxy_pass_request_headers on;
-    proxy_buffering off;
+    # Enable gRPC error handling
+    grpc_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
   }
 
 }
