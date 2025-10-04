@@ -10,7 +10,7 @@ server {
     proxy_set_header X-Forwarded-Proto $scheme;
   }
 
-  location /ws {
+  location /ws/ {
     proxy_set_header Host teamwald.local;
     proxy_pass http://192.168.49.2:80;
     proxy_http_version 1.1;
@@ -18,4 +18,22 @@ server {
     proxy_set_header Connection "upgrade";
     proxy_read_timeout 86400;
   }
+
+  location /chough/ {
+    proxy_set_header Host teamwald.local;
+    proxy_pass http://192.168.49.2:80;
+    proxy_http_version 2.0;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    # gRPC specific headers
+    proxy_set_header Content-Type "application/grpc";
+    proxy_set_header TE "trailers";
+
+    # Handle gRPC trailers
+    proxy_pass_request_headers on;
+    proxy_buffering off;
+  }
+
 }
