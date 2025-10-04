@@ -1,0 +1,11 @@
+server {
+  listen 50505 http2;
+  server_name mostdock;  # or localhost for local testing
+
+  location / {
+    # gRPC pass instead of proxy_pass
+    grpc_pass grpc://192.168.49.2:80;
+
+    grpc_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+  }
+}
