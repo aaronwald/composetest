@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: prusa2mqtt
-        image: prusa2mqtt:latest
+        image: aaronw/prusa2mqtt:latest
         imagePullPolicy: IfNotPresent
         env:
         - name: PRUSA_IP
