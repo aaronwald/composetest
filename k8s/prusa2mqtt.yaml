@@ -1,0 +1,91 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prusa2mqtt-config
+data:
+  PRUSA_IP: "192.168.0.181"
+  MQTT_BROKER: "mqtt"
+  MQTT_PORT: "1883"
+  MQTT_TOPIC: "prusa/basement"
+  MQTT_USER: "prusa"
+  POLL_INTERVAL: "30"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prusa2mqtt
+  labels:
+    app: prusa2mqtt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prusa2mqtt
+  template:
+    metadata:
+      labels:
+        app: prusa2mqtt
+    spec:
+      containers:
+      - name: prusa2mqtt
+        image: prusa2mqtt:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PRUSA_IP
+          valueFrom:
+            configMapKeyRef:
+              name: prusa2mqtt-config
+              key: PRUSA_IP
+        - name: PRUSA_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: prusa2mqtt-secret
+              key: prusa-api-key
+        - name: MQTT_BROKER
+          valueFrom:
+            configMapKeyRef:
+              name: prusa2mqtt-config
+              key: MQTT_BROKER
+        - name: MQTT_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: prusa2mqtt-config
+              key: MQTT_PORT
+        - name: MQTT_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: prusa2mqtt-config
+              key: MQTT_TOPIC
+        - name: MQTT_USER
+          valueFrom:
+            configMapKeyRef:
+              name: prusa2mqtt-config
+              key: MQTT_USER
+        - name: MQTT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: prusa2mqtt-secret
+              key: mqtt-password
+        - name: POLL_INTERVAL
+          valueFrom:
+            configMapKeyRef:
+              name: prusa2mqtt-config
+              key: POLL_INTERVAL
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        # Health check (optional)
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #     - python
+        #     - -c
+        #     - "import sys; sys.exit(0)"
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 30
+      restartPolicy: Always
